@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher - AI-Powered Job Matching</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎯 Resume Matcher</h1>
+            <p>AI-Powered Resume Analysis & Optimization</p>
+        </header>
+
+        <!-- Main Form -->
+        <div class="upload-section">
+            <form id="analyzeForm" enctype="multipart/form-data">
+                
+                <!-- Resume Input Section -->
+                <div class="form-section">
+                    <h2>📄 Your Resume</h2>
+                    <p class="hint">Upload a file OR paste your resume text</p>
+                    
+                    <!-- File Upload -->
+                    <div class="file-upload">
+                        <label for="resume_file" class="file-label">
+                            <span id="file-name">Choose File (.pdf, .docx, .txt)</span>
+                            <input type="file" id="resume_file" name="resume_file" accept=".pdf,.docx,.txt">
+                        </label>
+                    </div>
+                    
+                    <div class="divider">OR</div>
+                    
+                    <!-- Text Input -->
+                    <textarea 
+                        id="resume_text" 
+                        name="resume_text" 
+                        placeholder="Paste your resume here...&#10;&#10;Example:&#10;John Doe&#10;Software Engineer&#10;&#10;EXPERIENCE:&#10;- 5+ years in full-stack development&#10;- Proficient in Python, JavaScript, React&#10;- Led team of 4 developers..."
+                        rows="12"></textarea>
+                </div>
+
+                <!-- Job Description Section -->
+                <div class="form-section">
+                    <h2>💼 Job Description</h2>
+                    <p class="hint">Paste the job description you're applying for</p>
+                    
+                    <textarea 
+                        id="job_description" 
+                        name="job_description" 
+                        placeholder="Paste job description here...&#10;&#10;Example:&#10;We're seeking a Senior Software Engineer with:&#10;- 5+ years of experience in Python and JavaScript&#10;- Strong knowledge of React, Node.js&#10;- Experience with AWS cloud services&#10;- Bachelor's degree in Computer Science..."
+                        rows="12"
+                        required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary" id="analyzeBtn">
+                    <span id="btnText">Analyze Match</span>
+                    <span id="btnLoader" class="loader" style="display: none;"></span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Results Section (Initially Hidden) -->
+        <div id="resultsSection" class="results-section" style="display: none;">
+            
+            <!-- Overall Score -->
+            <div class="score-card" id="scoreCard">
+                <h2>Match Score</h2>
+                <div class="score-circle" id="scoreCircle">
+                    <span class="score-value" id="scoreValue">0%</span>
+                </div>
+                <p class="score-label" id="scoreLabel">Analyzing...</p>
+            </div>
+
+            <!-- Score Breakdown -->
+            <div class="breakdown-section">
+                <h3>📊 Score Breakdown</h3>
+                <div class="breakdown-grid">
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">BERT Semantic Similarity</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="bertProgress"></div>
+                        </div>
+                        <span class="breakdown-value" id="bertValue">0%</span>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Keyword Match (TF-IDF)</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="tfidfProgress"></div>
+                        </div>
+                        <span class="breakdown-value" id="tfidfValue">0%</span>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Category Alignment</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="categoryProgress"></div>
+                        </div>
+                        <span class="breakdown-value" id="categoryValue">0%</span>
+                        <p class="category-info" id="categoryInfo"></p>
+                    </div>
+                    
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Skills Match</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="skillsProgress"></div>
+                        </div>
+                        <span class="breakdown-value" id="skillsValue">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Analysis -->
+            <div class="skills-section">
+                <h3>🔍 Skills Analysis</h3>
+                
+                <!-- Matched Skills -->
+                <div class="skills-category">
+                    <h4 class="skills-header matched">✅ Matched Skills (<span id="matchedCount">0</span>)</h4>
+                    <div id="matchedSkills" class="skills-list"></div>
+                </div>
+                
+                <!-- Missing Skills -->
+                <div class="skills-category">
+                    <h4 class="skills-header missing">❌ Missing Skills (<span id="missingCount">0</span>)</h4>
+                    <div id="missingSkills" class="skills-list"></div>
+                </div>
+            </div>
+
+            <!-- AI Optimization Section -->
+            <div id="optimizationSection" class="optimization-section" style="display: none;">
+                <h3>🤖 AI-Powered Optimization</h3>
+                <p class="optimization-hint">Get personalized suggestions to improve your resume</p>
+                
+                <button class="btn-secondary" id="getSuggestionsBtn">
+                    Get AI Suggestions
+                </button>
+                
+                <!-- Suggestions Display -->
+                <div id="suggestionsDisplay" style="display: none;">
+                    <div class="suggestions-content" id="suggestionsContent"></div>
+                    
+                    <div class="approval-section">
+                        <h4>📝 Review & Approve Changes</h4>
+                        <p>Review the suggestions above. Add any specific instructions or changes you want to make:</p>
+                        <textarea 
+                            id="approvedPoints" 
+                            placeholder="Example:&#10;- Add Python and AWS skills&#10;- Emphasize leadership experience&#10;- Quantify achievements in project management section"
+                            rows="6"></textarea>
+                        
+                        <button class="btn-primary" id="optimizeResumeBtn">
+                            Optimize & Download Resume
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analyze Another -->
+            <div class="actions">
+                <button class="btn-outline" onclick="location.reload()">
+                    Analyze Another Resume
+                </button>
+            </div>
+        </div>
+
+        <!-- Error Display -->
+        <div id="errorDisplay" class="error-message" style="display: none;"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by BERT, TF-IDF, SVM & Claude AI | Built with ❤️ for better career matches</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

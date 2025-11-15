@@ -1,0 +1,561 @@
+/* ============================================================================
+   RESUME MATCHER - STYLESHEET
+   ============================================================================ */
+
+/* CSS Variables for Easy Theming */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #64748b;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --background: #f8fafc;
+    --card-background: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================================
+   RESET & BASE STYLES
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ============================================================================
+   CONTAINER & LAYOUT
+   ============================================================================ */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-lg);
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* ============================================================================
+   FORM SECTIONS
+   ============================================================================ */
+
+.upload-section {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 1.5em;
+}
+
+.hint {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+/* ============================================================================
+   FILE UPLOAD
+   ============================================================================ */
+
+.file-upload {
+    margin-bottom: 20px;
+}
+
+.file-label {
+    display: block;
+    padding: 20px;
+    background: var(--background);
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-secondary);
+}
+
+.file-label:hover {
+    border-color: var(--primary-color);
+    background: #eff6ff;
+}
+
+.file-label input[type="file"] {
+    display: none;
+}
+
+#file-name {
+    font-weight: 500;
+}
+
+.divider {
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+    color: var(--text-secondary);
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+/* ============================================================================
+   TEXTAREA
+   ============================================================================ */
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+
+.btn-primary,
+.btn-secondary,
+.btn-outline {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #475569;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Loader */
+.loader {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================================================
+   RESULTS SECTION
+   ============================================================================ */
+
+.results-section {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Score Card */
+.score-card {
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-lg);
+}
+
+.score-card h2 {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+.score-circle {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 12px solid var(--border-color);
+    transition: all 0.5s ease;
+}
+
+.score-circle.strong {
+    border-color: var(--success-color);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.score-circle.good {
+    border-color: var(--warning-color);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.score-circle.weak {
+    border-color: var(--danger-color);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.score-value {
+    font-size: 3em;
+    font-weight: 700;
+}
+
+.score-label {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* ============================================================================
+   BREAKDOWN SECTION
+   ============================================================================ */
+
+.breakdown-section {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+.breakdown-section h3 {
+    margin-bottom: 25px;
+    font-size: 1.4em;
+}
+
+.breakdown-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.breakdown-item {
+    padding: 15px;
+    background: var(--background);
+    border-radius: 8px;
+}
+
+.breakdown-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.progress-bar {
+    height: 12px;
+    background: var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #60a5fa);
+    border-radius: 6px;
+    transition: width 0.8s ease;
+}
+
+.breakdown-value {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+.category-info {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+/* ============================================================================
+   SKILLS SECTION
+   ============================================================================ */
+
+.skills-section {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+.skills-section h3 {
+    margin-bottom: 25px;
+    font-size: 1.4em;
+}
+
+.skills-category {
+    margin-bottom: 25px;
+}
+
+.skills-header {
+    padding: 12px 15px;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.1em;
+    margin-bottom: 0;
+}
+
+.skills-header.matched {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    border-left: 4px solid var(--success-color);
+}
+
+.skills-header.missing {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+    border-left: 4px solid var(--danger-color);
+}
+
+.skills-list {
+    padding: 15px;
+    background: var(--background);
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 60px;
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.skill-tag.matched {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success-color);
+}
+
+.skill-tag.missing {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--danger-color);
+}
+
+/* ============================================================================
+   OPTIMIZATION SECTION
+   ============================================================================ */
+
+.optimization-section {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-lg);
+}
+
+.optimization-section h3 {
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+.optimization-hint {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+#getSuggestionsBtn {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.suggestions-content {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    line-height: 1.8;
+    box-shadow: var(--shadow);
+}
+
+.approval-section {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.approval-section h4 {
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.approval-section p {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+#approvedPoints {
+    margin-bottom: 15px;
+}
+
+/* ============================================================================
+   ACTIONS & FOOTER
+   ============================================================================ */
+
+.actions {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+/* ============================================================================
+   ERROR DISPLAY
+   ============================================================================ */
+
+.error-message {
+    background: #fee2e2;
+    color: var(--danger-color);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 4px solid var(--danger-color);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    .upload-section,
+    .score-card,
+    .breakdown-section,
+    .skills-section,
+    .optimization-section {
+        padding: 20px;
+    }
+    
+    .score-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .score-value {
+        font-size: 2.5em;
+    }
+}
