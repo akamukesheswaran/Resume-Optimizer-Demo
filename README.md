@@ -1,1 +1,1 @@
-- run "streamlit run app.py" in your terminal - to run the demo
+- To run the demo first run the comment "Python Setup.py" and then run the comment "Python app.py"
