@@ -1,2 +1,1 @@
-- run "streamlit run app.py" in your terminal
--  
+- run "streamlit run app.py" in your terminal - to run the demo
